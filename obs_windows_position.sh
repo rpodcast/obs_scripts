@@ -3,9 +3,24 @@
 # arg 1: program name: "code" or "brave" or "GitKraken" or "desktop"
 
 # test getting vscode window in right dimensions
+
+#---------------------------------------------------------------------
+# examples when 1080p monitor is on left and 4k monitor is on right
+#---------------------------------------------------------------------
+#wmctrl -r code -e 0,1920,20,1520,1080
+#wmctrl -r code -e 0,1920,20,1920,1080
+#wmctrl -r "RStudio Server" -e 0,3840,20,1520,1080
+#wmctrl -r "RStudio Server" -e 0,3840,20,1920,1080
+#wmctrl -r GitKraken -e 0,1920,1000,1520,1080
+#wmctrl -r GitKraken -e 0,1920,1000,1920,1080
+
+#----------------------------------------------------------------------
+# examples when 1080p monitor is on right and 4k monitor is on left
+#----------------------------------------------------------------------
 #wmctrl -r code -e 0,0,20,1520,1080
 #wmctrl -r brave -e 0,1920,20,1520,1080
 #wmctrl -r brave -e 0,1920,1000,1920,1080
+#wmctrl -r "RStudio Server" -e 0,1920,20,1520,1080
 #wmctrl -r GitKraken -e 0,1920,1000,1520,1080
 #wmctrl -r GitKraken -e 0,1920,1080,1920,1080
 
@@ -30,10 +45,13 @@ case $current_scene in
 
     '"[*] Source Demonstration"')
         # resize vscode
-        wmctrl -r code -e 0,0,20,1920,1080
+        wmctrl -r code -e 0,1920,20,1920,1080
+
+        # resize rstudio
+        wmctrl -r "RStudio Server" -e 0,3840,20,1920,1080
 
         # resize brave
-        wmctrl -r Brave -e 0,1920,20,1920,1080
+        #wmctrl -r Firefox -e 0,1920,20,1920,1080
 
         # resize gitkraken
         wmctrl -r GitKraken -e 0,1920,1080,1920,1080
@@ -41,10 +59,13 @@ case $current_scene in
     
     '"[*] Source Demonstration with Chat"')
         # resize vscode
-        wmctrl -r code -e 0,0,20,1520,1080
+        wmctrl -r code -e 0,1920,20,1520,1080
+
+        # resize rstudio
+        wmctrl -r "RStudio Server" -e 0,3840,20,1520,1080
 
         # resize brave
-        wmctrl -r brave -e 0,1920,20,1520,1080
+        #wmctrl -r Firefox -e 0,1920,20,1520,1080
 
         # resize gitkraken
         wmctrl -r GitKraken -e 0,1920,1080,1520,1080

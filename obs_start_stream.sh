@@ -4,7 +4,7 @@
 # arg 2: Stream type: "shiny" or "rpodcast"
 
 # import stream key from file
-source /home/eric/scripts/stream_keys.env
+source /home/eric/scripts/obs_scripts/stream_keys.env
 
 set_stream_service=$1
 stream_type=$2
@@ -26,13 +26,16 @@ fi
 
 # set the scene to collage
 obs-cli SetCurrentScene='{"scene-name": "[*] Collage"}'
+sleep 1
 
 # obtain status of recording
 recording_status=$(obs-cli GetRecordingStatus | jq '.[0]' | jq '.isRecording')
+sleep 1
 #echo $recording_status
 
 # obtain current stream settings
 current_stream_settings=$(obs-cli GetStreamSettings | jq '.[0]' | jq '.settings')
+sleep 1
 #echo $current_stream_settings
 
 current_stream_service=$(echo "$current_stream_settings" | jq '.service')
@@ -44,14 +47,16 @@ then
     then
         notify-send --expire-time=1000 --icon=info "Setting YouTube"
         obs-cli SetStreamSettings='{"type": "rtmp_common", "settings": {"key": "'"$YOUTUBE_STREAM_KEY"'", "server": "rtmps://a.rtmps.youtube.com:443/live2", "service": "YouTube / YouTube Gaming" } }'
+        sleep 1
     else
         echo "Already on YouTube, no settings need to be updated"
     fi
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me Welcome Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me Welcome Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}' SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}' SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}' SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}' SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": true}'
+    sleep 1
 fi
 
 if [ $set_stream_service == "Twitch" ]
@@ -60,30 +65,30 @@ then
     then
         notify-send --expire-time=1000 --icon=info "Setting Twitch"
         obs-cli SetStreamSettings='{"type": "rtmp_common", "settings": {"key": "'"$TWITCH_STREAM_KEY"'", "server": "auto", "service": "Twitch" } }'
+        sleep 1
     else
         echo "Already on Twitch, no settings need to be updated"
     fi
 
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me Welcome Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
-    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me Welcome Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}' SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}' obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}' SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}' SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Only Me with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration with Chat Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Source Demonstration Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    #obs-cli SetSceneItemProperties='{"scene-name": "[AUTO] Closing Scene Subscribe Alert", "item": "[LOCAL] Subscribe Widget Scene Source", "visible": false}'
+    sleep 1
 fi
 
 notify-send --expire-time=1000 --icon=info "Finished stream setting"
 
-sleep 1
-
 # start streaming
 obs-cli StartStreaming
 
-sleep 7
+sleep 3
 
 # start recording
 obs-cli StartRecording
 
-sleep 5
+sleep 3
 if [ $stream_type == "shiny" ]
 then
     obs-cli SetCurrentScene='{"scene-name": "[*] Intro Scene Shiny"}'
