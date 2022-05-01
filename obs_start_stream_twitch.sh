@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
-# arg 1: Stream platform: "YouTube" or "Twitch"
-# arg 2: Stream type: "shiny" or "rpodcast"
+# arg 1: Stream type: "shiny" or "rpodcast"
 
 # import stream key from file
 source /home/eric/scripts/obs_scripts/stream_keys.env
 
-set_stream_service=$1
-stream_type=$2
-echo "Command-line argument 1: $set_stream_service"
-echo "Command-line argument 2: $stream_type"
+set_stream_service="Twitch"
+stream_type=$1
+echo "Command-line argument 1: $stream_type"
 
 #echo $YOUTUBE_STREAM_KEY
 #echo $TWITCH_STREAM_KEY
@@ -49,26 +47,6 @@ sleep 1
 
 current_stream_service=$(echo "$current_stream_settings" | jq '.service')
 #echo $current_stream_service
-
-if [ $set_stream_service == "YouTube" ]
-then
-    if [ "$current_stream_service" == '"Twitch"' ]
-    then
-        notify-send --expire-time=1000 --icon=info "Setting YouTube"
-        obs-cli-js SetStreamSettings='{"type": "rtmp_common", "settings": {"key": "'"$YOUTUBE_STREAM_KEY"'", "server": "rtmps://a.rtmps.youtube.com:443/live2", "service": "YouTube / YouTube Gaming" } }'
-        sleep 1
-    else
-        echo "Already on YouTube, no settings need to be updated"
-    fi
-
-    obs-cli sceneitem show "[AUTO] Only Me Welcome Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem show "[AUTO] Only Me with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem show "[AUTO] Source Demonstration with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem show "[AUTO] Source Demonstration Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem show "[AUTO] Closing Scene Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-
-    sleep 1
-fi
 
 if [ $set_stream_service == "Twitch" ]
 then
@@ -120,28 +98,32 @@ then
     obs-cli scene current "[*] Intro Scene RPodcast"
 fi
 
-# stop current song if playing
-/usr/bin/mpc stop
-sleep 0.5
+sleep 1
+/home/eric/scripts/obs_scripts/obs_music_switch.sh local
+sleep 1
 
-# clear song queue
-/usr/bin/mpc clear
-sleep 0.5
+# # stop current song if playing
+# /usr/bin/mpc stop
+# sleep 1
 
-# load playlist
-/usr/bin/mpc load livestream_starting_soon
-sleep 0.5
+# # clear song queue
+# /usr/bin/mpc clear
+# sleep 1
 
-# shuffle song order
-/usr/bin/mpc shuffle
-sleep 0.5
+# # load playlist
+# /usr/bin/mpc load livestream_starting_soon
+# sleep 1
 
-# start playing the first song
-/usr/bin/mpc play
-sleep 0.5
+# # shuffle song order
+# /usr/bin/mpc shuffle
+# sleep 1
+
+# # start playing the first song
+# /usr/bin/mpc play
+# sleep 0.5
 
 # set music volume to target level
 "${HOME}"/scripts/obs_scripts/obs_music_volume.sh target -10
 
-sleep 0.5
+sleep 1
 notify-send --expire-time=1000 --icon=info "Streaming now!"
