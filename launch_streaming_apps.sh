@@ -3,6 +3,11 @@
 # - "narrow": Size for when chat is open on right sidebar (typically live streaming)
 # - "wide" Size for screencasts where the window takes the full monitor resultion for the virtual display
 
+# Define constants
+primary_monitor="DP-2"
+secondary_monitor="DVI-D-0"
+phantom_monitor="HDMI-0"
+
 HOST=$(hostname -s)
 size_type="${1}"
 
@@ -71,6 +76,6 @@ esac
 "${HOME}"/scripts/obs_scripts/obs_place_window.sh "Microsoft" "DVI-D-0" 0 1100 1080
 
 # apps for virtual display
-"${HOME}"/scripts/obs_scripts/obs_place_window.sh "GitKraken" "HDMI-0" 0 "${virt_x_size}" "${virt_y_size}"
+#"${HOME}"/scripts/obs_scripts/obs_place_window.sh "GitKraken" "HDMI-0" 0 "${virt_x_size}" "${virt_y_size}"
 "${HOME}"/scripts/obs_scripts/obs_place_window.sh "Visual Studio Code" "HDMI-0" 0 "${virt_x_size}" "${virt_y_size}"
 "${HOME}"/scripts/obs_scripts/obs_place_window.sh "Firefox" "HDMI-0" 0 "${virt_x_size}" "${virt_y_size}"

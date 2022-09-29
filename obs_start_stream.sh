@@ -34,7 +34,7 @@ obs-cli scene current "[*] Collage"
 sleep 1
 
 # move audio devices to dedicated sinks
-"${HOME}"/scripts/obs_scripts/sink-move.sh "Music Player Daemon" "Music"
+#"${HOME}"/scripts/obs_scripts/sink-move.sh "Music Player Daemon" "Music"
 
 # obtain status of recording
 #recording_status=$(obs-cli-js GetRecordingStatus | jq '.[0]' | jq '.isRecording')
@@ -81,11 +81,11 @@ then
         echo "Already on Twitch, no settings need to be updated"
     fi
 
-    obs-cli sceneitem hide "[AUTO] Only Me Welcome Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem hide "[AUTO] Only Me with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem hide "[AUTO] Source Demonstration with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem hide "[AUTO] Source Demonstration Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
-    obs-cli sceneitem hide "[AUTO] Closing Scene Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
+    #obs-cli sceneitem hide "[AUTO] Only Me Welcome Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
+    #obs-cli sceneitem hide "[AUTO] Only Me with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
+    #obs-cli sceneitem hide "[AUTO] Source Demonstration with Chat Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
+    #obs-cli sceneitem hide "[AUTO] Source Demonstration Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
+    #obs-cli sceneitem hide "[AUTO] Closing Scene Subscribe Alert" "[LOCAL] Subscribe Widget Scene Source"
 
     sleep 1
 fi
@@ -95,9 +95,9 @@ notify-send --expire-time=1000 --icon=info "Finished stream setting"
 sleep 2
 
 # move audio sinks
-"${HOME}"/scripts/obs_scripts/sink-move.sh "Music Player Daemon" "Music"
-"${HOME}"/scripts/obs_scripts/sink-move.sh "Chromium" "Discord"
-"${HOME}"/scripts/obs_scripts/sink-move.sh "Firefox" "Web"
+#"${HOME}"/scripts/obs_scripts/sink-move.sh "Music Player Daemon" "Music"
+#"${HOME}"/scripts/obs_scripts/sink-move.sh "Chromium" "Discord"
+#"${HOME}"/scripts/obs_scripts/sink-move.sh "Firefox" "Web"
 
 notify-send --expire-time=1000 --icon=info "Finished audio sink routes"
 

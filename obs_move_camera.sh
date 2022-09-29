@@ -13,19 +13,21 @@ sleep 0.1
 case $camera_position in
 
     "ur")
-        obs-cli-js SetSourceFilterVisibility='{"sourceName": '"$current_scene"', "filterName": "Camera Upper Right", "filterEnabled": true}'
+        filter_name="[FILTER] Camera Upper Right"
         ;;
-    
+
     "lr")
-        obs-cli-js SetSourceFilterVisibility='{"sourceName": '"$current_scene"', "filterName": "Camera Lower Right", "filterEnabled": true}'
+        filter_name="[FILTER] Camera Lower Right"
         ;;
 
     "ul")
-        obs-cli-js SetSourceFilterVisibility='{"sourceName": '"$current_scene"', "filterName": "Camera Upper Left", "filterEnabled": true}'
+        filter_name="[FILTER] Camera Upper Left"
         ;;
     
     "ll")
-        obs-cli-js SetSourceFilterVisibility='{"sourceName": '"$current_scene"', "filterName": "Camera Lower Left", "filterEnabled": true}'
+        filter_name="[FILTER] Camera Lower Left"
         ;;
 esac
+
+obs-cli-js SetSourceFilterVisibility='{"sourceName": '"$current_scene"', "filterName": '"\"$filter_name\""', "filterEnabled": true}'
 
