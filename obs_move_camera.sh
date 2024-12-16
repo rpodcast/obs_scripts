@@ -13,19 +13,19 @@ sleep 0.1
 case $camera_position in
 
     "ur")
-        filter_name="[FILTER] Camera Upper Right"
+        filter_name="Camera Upper Right"
         ;;
 
     "lr")
-        filter_name="[FILTER] Camera Lower Right"
+        filter_name="Camera Lower Right"
         ;;
 
     "ul")
-        filter_name="[FILTER] Camera Upper Left"
+        filter_name="Camera Upper Left"
         ;;
     
     "ll")
-        filter_name="[FILTER] Camera Lower Left"
+        filter_name="Camera Lower Left"
         ;;
 esac
 
