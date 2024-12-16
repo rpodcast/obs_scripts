@@ -6,15 +6,15 @@ record_status=$1
 echo "Command-line argument 1: $record_status"
 
 # obtain status of recording
-recording_status=$(obs-cli GetRecordingStatus | jq '.[0]' | jq '.isRecording')
+recording_status=$(/home/eric/.local/bin/obs-cli-js GetRecordingStatus | jq '.[0]' | jq '.isRecording')
 sleep 1
 
 if [ $record_status == "start" ]
 then
-    obs-cli StartRecording
+    /home/eric/.local/bin/obs-cli-js StartRecording
 fi
 
 if [ $record_status == "stop" ]
 then
-    obs-cli StopRecording
+    /home/eric/.local/bin/obs-cli-js StopRecording
 fi
