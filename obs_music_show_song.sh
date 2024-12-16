@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Define constants for scene and source labels
-music_scene="[A] Music Scene"
-local_music_scene="[A] Local Music Wrapper Scene"
-local_music_display_scene="[G] Local Music Display"
-rainwave_music_scene="[A] Rainwave Music Wrapper Scene"
-rainwave_music_display_scene="[G] Rainwave Display"
-rainwave_music_display_source="[BROWSER] Rainwave Display Static Source"
+music_scene="[B] Music Scene"
+local_music_scene="[B] Local Music Scene"
+local_music_display_scene="[B] Local Music Display Scene"
+rainwave_music_scene="[B] Rainwave Music Scene"
+rainwave_music_display_scene="[SE] Rainwave Music Display"
+rainwave_music_display_source="[SE] Rainwave Music Display Static Source"
 
 # determine which music scene is active
 local_visible=$(obs-cli-js GetSceneItemProperties='{"scene-name": '"\"$music_scene\""', "item": '"\"$local_music_scene\""'}' | jq '.[0]' | jq '.visible')

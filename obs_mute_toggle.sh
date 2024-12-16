@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Define constants for scene and source labels
-mic_source="[LOCAL] Microphone Source"
-overlay_scene="[G] Animations Scenes"
-mute_scene="[G] Mic Mute Overlay"
+mic_source="[A] Microphone Scene Source"
+overlay_scene="[B] Animations Scenes"
+mute_scene="[ANI] Mic Mute Overlay"
 
 # toggle mute
 obs-cli-js ToggleMute='{"source": '"\"$mic_source\""'}'
